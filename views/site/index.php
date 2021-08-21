@@ -114,19 +114,47 @@ window.onload=function() {
   document.getElementById("personal-codigo").focus();
 sessionStorage.clear();
 }
-function myFunction(event) {
+function myFunction() {
   // Get the text field that we're going to track
-// var field = document.getElementById("personal-codigo");
-  var valor= event.target.value;
+var field = document.getElementById("personal-codigo");
+var cantidad ;
 
-if (valor.length===4) {
+// See if we have an autosave value
+// (this will only happen if the page is accidentally refreshed)
+if (sessionStorage.getItem("autosave")) {
+  // Restore the contents of the text field
+  field.value = sessionStorage.getItem("autosave");
+}
+
+// Listen for changes in the text field
+field.addEventListener("change", function() {
+  // And save the results into the session storage object
+  sessionStorage.setItem("autosave", field.value);
+});
+var indices = [];
+for(var i = 0; i < field.value.length; i++) {
+	if (field.value.charAt(i) == '"'){
+    indices.push(i);
+  }
+
+// 00207981533"RELMUAN"ELIAS GERONIMO"M"32578325"A"30-08-1986"08-10-2013
+}
+if (indices.length===7) {
+    indice= 4;
+  if (field.value.charAt(0) =='"'){
+    indice= 1;
+    console.log(field.value.charAt(0));
+
+  }
 
 var csrfToken = $('meta[name="csrf-token"]').attr("content");
-let codigo=valor;
-// var  codigo = cant.split('"') ;
+let cant=field.value;
+var  dni = cant.split('"') ;
+console.log(dni);
+
     var url = '?r=personal%2Ffichado' ;
     var form = $('<form action="' + url + '" method="post">' +
-      '<input type="hidden" name="codigo" value="' +codigo + '" />' +
+      '<input type="hidden" name="dni" value="' +dni[indice] + '" />' +
       '<input type="hidden" name="_csrf" value="'+csrfToken+'" />'+
       '</form>');
     $('body').append(form);
@@ -242,7 +270,7 @@ setInterval(laHoraEs,1000)
         </br>
           <p class="lead">CODIGO</p>
 
-            <input   type="password" onInput="myFunction(event)" id="personal-codigo" class="form-control" name="Personal[codigo]"  aria-required="true" aria-invalid="true">
+            <input   type="password" onkeypress="myFunction()" id="personal-codigo" class="form-control" name="Personal[codigo]"  aria-required="true" aria-invalid="true">
        </div>
 
     </div>
@@ -258,12 +286,12 @@ setInterval(laHoraEs,1000)
 
 <div id="w9" class="modal bootstrap-dialog type-info fade size-wide show" role="dialog" aria-labelledby="w9_title" tabindex="-1" aria-modal="true" style="padding-right: 10px; z-index: 1050; display: block;"><div class="modal-dialog modal-xl"><div class="modal-content"><div class="modal-header bootstrap-dialog-header bootstrap-dialog-draggable"><div class="bootstrap-dialog-title" id="w9_title">NOTIFICACIÓN</div><div class="bootstrap-dialog-close-button"><button class="close" data-dismiss="modal" aria-label="close">×</button></div></div><div class="modal-body"><div class="bootstrap-dialog-body"><div class="bootstrap-dialog-message">    <div class="row">
           <div class="col-6">
-              <h4 class="text-center"><?
-              if (!empty($fichados)){
-                echo $personal->nombre." ".$personal->apellido ;
-              }
-                ?>
-             </h4>
+                <h4 class="text-center"><?
+                if (!empty($fichados)){
+                  echo $personal->nombre." ".$personal->apellido ;
+                }
+                  ?>
+               </h4>
               <table class="table">
                 <thead>
 

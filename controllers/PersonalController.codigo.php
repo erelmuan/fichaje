@@ -312,13 +312,13 @@ class PersonalController extends Controller
     public function actionFichado(){
 
       // busco si esta en personal atraves del dni obtengo el legajo
-      if (isset($_POST['dni'])) {
+      if (isset($_POST['codigo'])) {
 
           $data = Yii::$app->request->post();
-          $dni= explode(":", $data['dni']);
+          $dni= explode(":", $data['codigo']);
           $documento= $dni[0];
           $model = new Personal();
-        $personal=  $model::find()->where(['dni' => $documento])->one();
+        $personal=  $model::find()->where(['codigo' => $documento])->one();
 
           if (!empty($personal)){
                 $legajo=  $personal->legajo;
