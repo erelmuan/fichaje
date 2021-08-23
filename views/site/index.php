@@ -15,9 +15,23 @@ $this->title = 'Fichero - Hospital Zatti';
 CrudAsset::register($this);
 
 ?>
+<style>
+body {
+  background: url(../web/verde.jpg)no-repeat center center;
+    /* background: blue;
+  font-size: 36px;
+  color: #fff; */
+
+}
+
+</style>
 <div class="site-index">
 
-     <?php if(Yii::$app->session->getFlash('success')) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
+     <?php
+
+     if(Yii::$app->session->getFlash('success')) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario.
+      //if(true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
+
          <script>
          $(document).ready(function()
          {
@@ -39,208 +53,13 @@ CrudAsset::register($this);
          </script>
      <?php endif; ?>
 
-<style>
-  @import url('https://fonts.googleapis.com/css?family=Google+Sans');
-  /*--------------*/
-.modal {width: 100%;
-height: 100%;
-}
 
 
-  body {
-        background: url(../imagenes/configuration_13194.png.JPG) no-repeat center center;
-  	background: url(../web/Header.jpg);
-  	/*font-size: 36px;*/
-  	/* color: #fff; */
-
-  }
-  #fichado {
-  color: #fff; }
-.reloj , .fecha  , .lead{
-color: #fff; }
-  .wrap {
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-
-  .widget {
-  /* 	width: 600px; */
-  	margin: 25px;
-  }
-
-  .widget p {
-  	display: inline;
-    position: relative;
-  }
-
-  .fecha {
-  	font-family: 'Google Sans', sans-serif;
-  	text-align: center;
-  	font-size: 2em;
-  	padding: 20px;
-  	width: 100%;
-  	background: rgb(0, 0, 0, .7);
-  	margin-bottom: 5px;
-    box-sizing: border-box;
-    border-radius: 25px 25px 0 0
-  }
-
-  .reloj {
-  	font-family: 'Google Sans';
-  	text-align: center;
-  	font-size: 4.5em;
-  	padding: 20px;
-  	width: 100%;
-  	background: rgb(0, 0, 0, .7);
-    box-sizing: border-box;
-    border-radius: 0 0 25px 25px
-  }
-
-  /* .reloj .caja-segundos {
-  	display: inline-block;
-  } */
-  /* .bootstrap-dialog.type-success .modal-header {
-    background-color: #28a745;
-} */
-
-  </style>
-<script>
-window.onload=function() {
-
-  document.getElementById("personal-codigo").focus();
-sessionStorage.clear();
-}
-function myFunction() {
-  // Get the text field that we're going to track
-var field = document.getElementById("personal-codigo");
-var cantidad ;
-
-// See if we have an autosave value
-// (this will only happen if the page is accidentally refreshed)
-if (sessionStorage.getItem("autosave")) {
-  // Restore the contents of the text field
-  field.value = sessionStorage.getItem("autosave");
-}
-
-// Listen for changes in the text field
-field.addEventListener("change", function() {
-  // And save the results into the session storage object
-  sessionStorage.setItem("autosave", field.value);
-});
-var indices = [];
-for(var i = 0; i < field.value.length; i++) {
-	if (field.value.charAt(i) == '"'){
-    indices.push(i);
-  }
-
-// 00207981533"RELMUAN"ELIAS GERONIMO"M"32578325"A"30-08-1986"08-10-2013
-}
-if (indices.length===7) {
-    indice= 4;
-  if (field.value.charAt(0) =='"'){
-    indice= 1;
-    console.log(field.value.charAt(0));
-
-  }
-
-var csrfToken = $('meta[name="csrf-token"]').attr("content");
-let cant=field.value;
-var  dni = cant.split('"') ;
-console.log(dni);
-
-    var url = '?r=personal%2Ffichado' ;
-    var form = $('<form action="' + url + '" method="post">' +
-      '<input type="hidden" name="dni" value="' +dni[indice] + '" />' +
-      '<input type="hidden" name="_csrf" value="'+csrfToken+'" />'+
-      '</form>');
-    $('body').append(form);
-    form.submit();
-
-}
-
-}
-</script>
-<script>
-function laHoraEs () {
-    var fecha = new Date();
-
-  var horas = fecha.getHours(),
-    minutos = fecha.getMinutes(),
-    segundos = fecha.getSeconds(),
-    diaSemana = fecha.getDay(),
-    dia = fecha.getDate(),
-    mes = fecha.getMonth(),
-    year = fecha.getFullYear();
-
-  var semana = [
-    'Domingo',
-    'Lunes',
-    'Martes',
-    'Miércoles',
-    'Jueves',
-    'Viernes',
-    'Sábado'
-  ];
-
-  var meses = [
-    'Enero',
-    'Febrero',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre'
-  ];
-
-   if (dia < 10) {
-    dia = "0" + dia
-  }
-  var pSemana = document.getElementById('diaSemana')
-  pSemana.textContent = semana[diaSemana] +", "
-  var pDia = document.getElementById('dia')
-    pDia.textContent = dia
-
-  var pMes = document.getElementById('mes')
-    pMes.textContent = meses[mes]
-
-  var mYear = document.getElementById('year')
-    mYear.textContent = year
-
-   if (horas < 10) {
-    horas = "0" + horas
-  }
-  var pHora = document.getElementById('horas')
-    pHora.textContent = horas
-
-    if (minutos < 10) {
-    minutos = "0" + minutos
-  }
-  var pMinuto = document.getElementById('minutos')
-    pMinuto.textContent = minutos
-
-  // if (segundos < 10) {
-  //   segundos = "0" + segundos
-  // }
-  // var pSegundos = document.getElementById('segundos')
-  //   pSegundos.textContent = segundos
-}
-
-setInterval(laHoraEs,1000)
-</script>
 
     <div class="jumbotron">
         <!-- <h1>Sistema de fichado</h1> -->
         <p>
-          <h1><div id="fichado" >SISTEMA DE FICHADO </div></h1>
+          <h1><div id="fichado" >SISTEMA DE CONTROL </div></h1>
       </p>
         <div class="col-md-6 col-sm-12 col-xs-12 form-group">
           <div class="wrap">
@@ -268,9 +87,9 @@ setInterval(laHoraEs,1000)
         </br>
         </br>
         </br>
-          <p class="lead">CODIGO</p>
+          <p class="codigo">CÓDIGO</p>
 
-            <input   type="password" onkeypress="myFunction()" id="personal-codigo" class="form-control" name="Personal[codigo]"  aria-required="true" aria-invalid="true">
+            <input   type="password" onkeypress="myFunction()" id="personal-codigo" class="form-control" name="Personal[codigo]" onBlur="ponerFocus()" />
        </div>
 
     </div>
@@ -296,10 +115,10 @@ setInterval(laHoraEs,1000)
                 <thead>
 
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">HORA DE ENTRADA</th>
-                    <th scope="col">HORA DE SALIDA</th>
-                    <th scope="col">CANT. HORAS</th>
+                    <th class="col">#</th>
+                    <th class="col">HORA DE ENTRADA</th>
+                    <th class="col">HORA DE SALIDA</th>
+                    <th class="col">CANT. HORAS</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -311,10 +130,10 @@ setInterval(laHoraEs,1000)
                   $cant=0;
                    foreach ($fichados as $fichado) {?>
                   <tr>
-                    <th scope="row"><?=$cant?></th>
-                    <td><?=$fichado->hora_ingreso ?></td>
-                    <td><?=$fichado->hora_salida  ?></td>
-                    <td><?=$fichado->cant_horas  ?></td>
+                    <th class="row"><?=$cant?></th>
+                    <td class="row"><?=$fichado->hora_ingreso ?></td>
+                    <td class="row" ><?=$fichado->hora_salida  ?></td>
+                    <td class="row"><?=$fichado->cant_horas  ?></td>
                   </tr>
                 <?  $cant ++;}} ?>
                 </tbody>

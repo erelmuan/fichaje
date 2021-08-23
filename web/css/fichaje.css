@@ -1,0 +1,80 @@
+
+  @import url('https://fonts.googleapis.com/css?family=Google+Sans');
+  /*--------------*/
+.modal {width: 100%;
+height: 100%;
+}
+
+
+  body {
+        background: url(../imagenes/configuration_13194.png.JPG) no-repeat center center;
+  	background: url(../web/Header.jpg)no-repeat center center;
+      /* background: blue;
+  	font-size: 36px;
+  	color: #fff; */
+
+  }
+  #fichado, #codigo {
+  color: black; }
+.reloj , .fecha  , .lead{
+color: #fff; }
+  .wrap {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .widget {
+  /* 	width: 600px; */
+  	margin: 25px;
+  }
+
+  .widget p {
+  	display: inline;
+    position: relative;
+  }
+
+  .fecha {
+  	font-family: 'Google Sans', sans-serif;
+  	text-align: center;
+  	font-size: 2em;
+  	padding: 20px;
+  	width: 100%;
+  	background: rgb(0, 0, 0, .7);
+  	margin-bottom: 5px;
+    box-sizing: border-box;
+    border-radius: 25px 25px 0 0
+  }
+
+  .reloj {
+  	font-family: 'Google Sans';
+  	text-align: center;
+  	font-size: 4.5em;
+  	padding: 20px;
+  	width: 100%;
+  	background: rgb(0, 0, 0, .7);
+    box-sizing: border-box;
+    border-radius: 0 0 25px 25px
+  }
+
+    .row {
+    	font-family: 'Google Sans';
+    	font-size: 1.2em;
+
+
+    }
+    .col {
+      font-family: 'Google Sans';
+      font-size: 1.2em;
+    }
+
+
+  /* .reloj .caja-segundos {
+  	display: inline-block;
+  } */
+  /* .bootstrap-dialog.type-success .modal-header {
+    background-color: #28a745;
+} */

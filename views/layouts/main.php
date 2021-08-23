@@ -26,7 +26,8 @@ AppAsset::register($this);
     <?= Html::jsFile('@web/js/sweetalert2.all.min.js') ?>
       <?= Html::jsFile('@web/js/jquery.min.js') ?>
       <?= Html::jsFile('@web/js/flashjs/dist/flash.min.js') ?>
-
+      <?= Html::jsFile('@web/js/fichaje.js') ?>
+      <?= Html::cssFile('@web/css/fichaje.css') ?>
 
     <?php $this->head() ?>
 </head>
