@@ -22,6 +22,7 @@ body {
   font-size: 36px;
   color: #fff; */
 
+
 }
 
 </style>
@@ -87,7 +88,7 @@ body {
         </br>
         </br>
         </br>
-          <p class="codigo">CÓDIGO</p>
+          <p id="codigo">CÓDIGO</p>
 
             <input   type="password" onkeypress="myFunction()" id="personal-codigo" class="form-control" name="Personal[codigo]" onBlur="ponerFocus()" />
        </div>
